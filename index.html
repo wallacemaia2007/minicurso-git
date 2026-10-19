@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Git: commit e push</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 32px 18px;
+      background: #f3f5f8;
+      color: #202938;
+      font: 16px Arial, sans-serif;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 40px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px #17203312;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    main>p {
+      color: #526071;
+      line-height: 1.5;
+    }
+
+    .areas {
+      display: flex;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .area {
+      flex: 1;
+      min-height: 170px;
+      padding: 18px;
+      border: 1px solid #d8dee8;
+      border-radius: 9px;
+    }
+
+    .area h2 {
+      margin: 0 0 18px;
+      font-size: 18px;
+    }
+
+    .area p {
+      color: #526071;
+    }
+
+    .area span {
+      color: #b56a00;
+      font-size: 13px;
+    }
+
+    .status,
+    .received {
+      display: none;
+      color: #167347 !important;
+    }
+
+    .github .received {
+      color: #167347;
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .buttons input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .buttons label {
+      padding: 11px 16px;
+      border-radius: 7px;
+      background: #e95420;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .buttons label:last-child {
+      background: #25834e;
+    }
+
+    .buttons input:focus-visible+label {
+      outline: 3px solid #222;
+    }
+
+    #commit:checked~label[for="commit"],
+    #push:checked~label[for="push"] {
+      background: #777;
+    }
+
+    body:has(#commit:checked) .commit-status {
+      display: block;
+    }
+
+    body:has(#commit:checked) .area span {
+      display: none;
+    }
+
+    body:has(#push:checked) .push-status {
+      display: block;
+    }
+
+    body:has(#push:checked) .waiting {
+      display: none;
+    }
+
+    body:has(#push:checked) .received {
+      display: block;
+    }
+
+    .hint {
+      font-size: 14px;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: 14px;
+      border-radius: 7px;
+      background: #202938;
+      color: #f4f6fa;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 560px) {
+      main {
+        padding: 22px;
+      }
+
+      .areas {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>Git: commit e push</h1>
+    <p>Commit salva uma versão no seu computador. Push envia essa versão para o GitHub.</p>
+
+    <section class="areas">
+      <div class="area">
+        <h2>Meu computador</h2>
+        <p>📄 index.html <span>modificado</span></p>
+        <div class="status commit-status">Commit salvo localmente</div>
+        <div class="status push-status">Enviado para o GitHub</div>
+      </div>
+      <div class="area github">
+        <h2>GitHub</h2>
+        <p class="waiting">Ainda não recebeu mudanças</p>
+        <p class="received">Commit recebido!</p>
+      </div>
+    </section>
+
+    <div class="buttons">
+      <input type="checkbox" id="commit">
+      <label for="commit">Fazer commit</label>
+      <input type="checkbox" id="push">
+      <label for="push">Fazer push</label>
+    </div>
+
+    <p class="hint">Clique nos botões para ver o que acontece em cada etapa.</p>
+    <pre>git add index.html
+git commit -m "minha mudança"
+git push origin main</pre>
+  </main>
+</body>
+
+</html>
